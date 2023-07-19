@@ -6,3 +6,6 @@ secret_key = "╚É4£1↨E4465╚456123►65╚4848bnjfk♦♦54"
 @app.route("/")
 def home():
     return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)

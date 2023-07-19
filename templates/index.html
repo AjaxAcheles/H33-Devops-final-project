@@ -5,7 +5,7 @@
     <title>My Online Desktop</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
 </head>
 <body onload="startTime()">
     <div class="container">
@@ -24,6 +24,37 @@
             </div>
             <div class="widget">
                 <h3>Widget 02</h3>
+                <div class="notepad">
+                    <nobr>
+                    <label class="calender-label" for="mon">Mon</label>
+                    <textarea id="mon" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                    <nobr>
+                    <label class="calender-label" for="tue">Tue</label>
+                    <textarea id="tue" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                    <nobr>
+                    <label class="calender-label" for="wed">Wed</label>
+                    <textarea id="wed" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                    <nobr>
+                    <label class="calender-label" for="thu">Thu</label>
+                    <textarea id="thu" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                    <nobr>
+                    <label class="calender-label" for="fri">Fri</label>
+                    <textarea id="fri" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                    <nobr>
+                    <label class="calender-label" for="sat">Sat</label>
+                    <textarea id="sat" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                    <nobr>
+                    <label class="calender-label" for="sun">Sun</label>
+                    <textarea id="sun" class="calender-input" name="message" rows="20" cols="40" spellcheck="false" data-ms-editor="true"></textarea>
+                    </nobr>
+                </div>
+                <button id="save-calender-button">Save</button>
             </div>
             <div class="widget">
                 <h3>Widget 03</h3>
@@ -37,6 +68,15 @@
             $("#note-area").val(savedNotes);
         } else {
             $("#note-area").val("");
+        }
+
+        var daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+        var calenderInputTags = document.getElementsByClassName("calender-input");
+        for (var i = 0; calenderInputTags.length - 1 >= i; i++) {
+            tag = calenderInputTags[i];
+            text = localStorage.getItem(daysOfWeek[i]);
+            console.log(text);
+            $(tag).val(text);
         }
     }
 
@@ -60,6 +100,16 @@
         $("#saveNoteBtn").click(function() {
             var currentNotes = $("#note-area").val();
             localStorage.setItem("notes", currentNotes);
+        });
+
+        $("#save-calender-button").click(function() {
+            var daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+            var calenderInputTags = document.getElementsByClassName("calender-input");
+            for (var i = 0; calenderInputTags.length - 1 >= i; i++) {
+                tag = calenderInputTags[i];
+                text = $(tag).val();
+                localStorage.setItem(daysOfWeek[i], text);
+            }
         });
     });
 </script>
